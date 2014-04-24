@@ -24,3 +24,10 @@ default[:consul][:checksums] = {
   '0.1.0_linux_amd64' => '80912eb136acf5ac6ba77284138e4536cd1289870f202ed17ed67bbf2c6b630c',
   '0.1.0_windows_386' => '8757e01531df888128c9c1be4735acb80954e4b14a775718b3cff569c6e5e5b0'
 }
+
+case node[:platform_family]
+when 'rhel'
+  default[:consul][:install_method] = 'source'
+else
+  default[:consul][:install_method] = 'binary'
+end

@@ -15,5 +15,13 @@
 # limitations under the License.
 #
 
-include_recipe "consul::#{ node[:consul][:install_method] }_install"
-include_recipe "consul::service"
+template '/etc/init.d/consul' do
+  source 'consul-init.erb'
+  mode 0755
+  notifies :restart, 'service[consul]', :delayed
+end
+
+service 'consul' do
+  supports :status => true, :restart => true
+  action [:enable, :start]
+end

@@ -16,7 +16,8 @@
 #
 
 default[:consul][:base_url] = 'https://dl.bintray.com/mitchellh/consul/'
-default[:consul][:version] = '0.1.0'
+default[:consul][:version] = '0.2.0'
+default[:consul][:install_method] = 'binary'
 default[:consul][:install_dir] = '/usr/local/bin'
 default[:consul][:checksums] = {
   '0.1.0_darwin_amd64' => '7989af75d1bbd43a4dff8f440c9a0883a4bcd66a52d94534f94e1ed1ae219681',
@@ -25,9 +26,3 @@ default[:consul][:checksums] = {
   '0.1.0_windows_386' => '8757e01531df888128c9c1be4735acb80954e4b14a775718b3cff569c6e5e5b0'
 }
 
-case node[:platform_family]
-when 'rhel'
-  default[:consul][:install_method] = 'source'
-else
-  default[:consul][:install_method] = 'binary'
-end
